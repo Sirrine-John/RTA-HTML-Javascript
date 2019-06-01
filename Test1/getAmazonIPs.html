@@ -13,7 +13,7 @@
  
 <script>
   function collectData() {
-    var showData = $('#show-data');
+    let showData = $('#show-data');
     $.getJSON('https://ip-ranges.amazonaws.com/ip-ranges.json',
         function (data) {
           console.log(data);
@@ -27,8 +27,8 @@
           details = shortList.filter((v,i) => shortList.indexOf(v) === i)
           details.sort();
           showData.empty();
-          var content = '<tr><td>' + details.join('</td></tr><tr><td>') + '</td></tr>';
-          var list = $('<table />').html(content);
+          let content = '<tr><td>' + details.join('</td></tr><tr><td>') + '</td></tr>';
+          let list = $('<table />').html(content);
           showData.append(list);
           }
     );
