@@ -21,14 +21,14 @@
           let items = data.prefixes.filter(function(ip){return  (ip.region == "us-west-2" && ip.service == "AMAZON")});
           let shortList = new Array;
           items.map(function (item) {
-            shortList.push(item.region + ': ' + item.ip_prefix);
+            shortList.push(item.ip_prefix);
           });
           let details = new Array;
           details = shortList.filter((v,i) => shortList.indexOf(v) === i)
           details.sort();
           showData.empty();
-          var content = '<li>' + details.join('</li><li>') + '</li>';
-          var list = $('<ul />').html(content);
+          var content = '<tr><td>' + details.join('</td></tr><tr><td>') + '</td></tr>';
+          var list = $('<table />').html(content);
           showData.append(list);
           }
     );
