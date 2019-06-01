@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.getJSON demo</title>
+  <style>
+  img {
+    height: 100px;
+    float: left;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ <button id="get-data">push me</button>
+<div id="show-data"></div>
+ 
+<script>
+ $(document).ready(function () {
+  $('#get-data').click(function () {
+    var showData = $('#show-data');
+
+    $.getJSON('https://ip-ranges.amazonaws.com/ip-ranges.json', function (data) {
+      console.log(data);
+
+      let items = data.prefixes.filter(function(ip){return (ip.region == "us-west-1" || ip.region == "us-west-2")});
+      let details = new Array;
+      for (let i=0; i<details.length;i++)
+      {items.map(function (item) {
+        details.push(item.region + ': ' + item.ip_prefix);
+      });};
+
+      showData.empty();
+
+      var content = '<li>' + details.join('</li><li>') + '</li>';
+      var list = $('<ul />').html(content);
+      showData.append(list);
+      }
+    );
+
+    showData.text('Loading the JSON file.');
+  });
+});
+</script>
+ 
+</body>
+</html>
